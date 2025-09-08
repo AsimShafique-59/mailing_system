@@ -1,7 +1,3 @@
-# property_mail_agent.py
-# Reads only new UNSEEN emails, classifies with LLM, replies, and forwards property mails.
-# For property mails, attaches a .docx and a .pdf with an interactive signature field.
-
 import os, re, ssl, time, json, email, imaplib, smtplib, traceback, tempfile
 from io import BytesIO
 from datetime import datetime, timezone
@@ -12,15 +8,11 @@ from bs4 import BeautifulSoup
 from docx import Document
 from dotenv import load_dotenv
 from groq import Groq
-
-# PDF libs
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import A4
 from pdfrw import PdfReader, PdfWriter, IndirectPdfDict
 
 load_dotenv()
-
-# ============== Config from .env ==============
 IMAP_HOST        = os.getenv("IMAP_HOST", "")
 IMAP_PORT        = int(os.getenv("IMAP_PORT", "993"))
 IMAP_USER        = os.getenv("IMAP_USER", "")
